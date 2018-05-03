@@ -28,6 +28,7 @@ public class ExpenseController {
         expenses.save(new Expense(new Date(), 50, "Stuff", "Target"));
         expenses.save(new Expense(new Date(), 101, "More Stuff", "Target"));
         expenses.save(new Expense(new Date(), 22, "Even more Stuff", "Target"));
+        expenses.save(new Expense(new Date(), 22, "Even more Stuff", "Clothing"));
         
     }
 
@@ -54,10 +55,14 @@ public class ExpenseController {
     //    new mapping, experiment
     @RequestMapping("/categoriesTable")
     public String categoriesTable(Model model) {
-        double totalExpenses = expenses.getTotalExpensesByCategory("Target");
+        double totalExpensesTarget = expenses.getTotalExpensesByCategory("Target");
         // if there's no Target expenses, this returns null, so check for null. Adding nulls to the model causes an exception.
-        System.out.println("total expenses at target " + totalExpenses);
-        model.addAttribute("totalExpenses", totalExpenses);
+        System.out.println("total expenses at target " + totalExpensesTarget);
+        model.addAttribute("totalExpensesTarget", totalExpensesTarget);
+        double totalExpensesClothing = expenses.getTotalExpensesByCategory("Clothing");
+        // if there's no Target expenses, this returns null, so check for null. Adding nulls to the model causes an exception.
+        System.out.println("total expenses for clothing " + totalExpensesClothing);
+        model.addAttribute("totalExpensesClothing", totalExpensesClothing);
         return "categoriesTable.html";
 //        return new ModelAndView("categoriesTable.html", "expense", new Expense());
     }
