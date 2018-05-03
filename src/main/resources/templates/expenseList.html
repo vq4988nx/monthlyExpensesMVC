@@ -1,0 +1,341 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<head>
+
+    <!--Milligram stylesheet-->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+
+    <!--Custom stylesheet-->
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
+    <title>Spending Events</title>
+
+</head>
+<body>
+
+<h1>Spending Events Table</h1>
+
+<h2>Total Amount Spent</h2>
+
+<span id="value"></span>
+
+<p>Click the button to sort the table alphabetically, by name:</p>
+<p><button onclick="sortTableD()">Sort by Description</button></p>
+
+<p>Click the button to sort the table alphabetically, by name:</p>
+<p><button onclick="sortTableA()">Sort by amount</button></p>
+
+<table id = "table">
+    <tr>
+        <th>.</th>
+        <th>.</th>
+        <th>ID</th>
+        <th>DATE</th>
+        <th>AMOUNT</th>
+        <th>DESCRIPTION</th>
+        <th>CATEGORY</th>
+    </tr>
+    <tr th:each="expense : ${expenses}">
+        <td><button class="modify-button" th:id="'modify-button-' + ${expense.id}" >Modify Entry</button></td>
+        <td><a th:id="'delete-'+${expense.id}">Delete Entry</button></a></td>
+        <!--<td><button id="myBtnn">Delete Entry</button></td>-->
+        <td th:id="'expense-id-'+${expense.id}" th:text="${expense.id}"></td>
+        <td th:id="'expense-date-'+${expense.id}" th:text="${expense.dayt}"></td>
+        <td th:text="${expense.amount}" class="rowDataSd"></td>
+        <td th:id="'expense-description-'+${expense.id}" th:text="${expense.description}"></td>
+        <td th:text="${expense.category}"></td>
+
+
+
+    </tr>
+
+</table>
+
+<span id="val"></span>
+
+
+<!--This js gets the total of the amount column.-->
+<!--Used this tutorial as a guide to get the total-->
+<!--https://1bestcsharp.blogspot.com/2017/08/javascript-table-column-values-sum.html-->
+<script>
+
+    var table = document.getElementById("table"), sumVal = 0;
+
+    for(var i = 1; i < table.rows.length; i++)
+    {
+        // This is getting the total from the 5th column, amount [4]
+        sumVal = sumVal + parseInt(table.rows[i].cells[4].innerHTML);
+    }
+
+    document.getElementById("val").innerHTML = "Sum Value = $" + sumVal;
+    console.log(sumVal);
+
+</script>
+
+<!--This works-->
+<script>
+function sortTableD() {
+var table, rows, switching, i, x, y, shouldSwitch;
+table = document.getElementById("table");
+switching = true;
+/*Make a loop that will continue until
+no switching has been done:*/
+while (switching) {
+//start by saying: no switching is done:
+switching = false;
+rows = table.getElementsByTagName("TR");
+/*Loop through all table rows (except the
+first, which contains table headers):*/
+for (i = 1; i < (rows.length - 1); i++) {
+//start by saying there should be no switching:
+shouldSwitch = false;
+/*Get the two elements you want to compare,
+one from current row and one from the next:*/
+x = rows[i].getElementsByTagName("TD")[5];
+y = rows[i + 1].getElementsByTagName("TD")[5];
+console.log(x);
+console.log(y);
+//check if the two rows should switch place:
+if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+//if so, mark as a switch and break the loop:
+shouldSwitch= true;
+break;
+}
+}
+if (shouldSwitch) {
+/*If a switch has been marked, make the switch
+and mark that a switch has been done:*/
+rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+switching = true;
+}
+}
+}
+</script>
+
+<!--&lt;!&ndash;This works, but I am trying something else&ndash;&gt;-->
+<script>
+function sortTableA() {
+var table, rows, switching, i, x, y, shouldSwitch;
+table = document.getElementById("table");
+switching = true;
+/*Make a loop that will continue until
+no switching has been done:*/
+while (switching) {
+//start by saying: no switching is done:
+switching = false;
+rows = table.getElementsByTagName("TR");
+/*Loop through all table rows (except the
+first, which contains table headers):*/
+for (i = 1; i < (rows.length - 1); i++) {
+//start by saying there should be no switching:
+shouldSwitch = false;
+/*Get the two elements you want to compare,
+one from current row and one from the next:*/
+x = rows[i].getElementsByTagName("TD")[4];
+y = rows[i + 1].getElementsByTagName("TD")[4];
+//check if the two rows should switch place:
+
+console.log(x.innerHTML);
+console.log(y.innerHTML);
+
+
+if (x.innerHTML < y.innerHTML) {
+//if so, mark as a switch and break the loop:
+shouldSwitch= true;
+break;
+}
+}
+if (shouldSwitch) {
+/*If a switch has been marked, make the switch
+and mark that a switch has been done:*/
+rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+switching = true;
+}
+}
+}
+</script>
+
+<!--This works, but I am trying something else-->
+<!--<script>-->
+<!--function sortTableD() {-->
+<!--var table, rows, switching, i, x, y, shouldSwitch;-->
+<!--table = document.getElementById("table");-->
+<!--switching = true;-->
+<!--/*Make a loop that will continue until-->
+<!--no switching has been done:*/-->
+<!--while (switching) {-->
+<!--//start by saying: no switching is done:-->
+<!--switching = false;-->
+<!--rows = table.getElementsByTagName("TR");-->
+<!--/*Loop through all table rows (except the-->
+<!--first, which contains table headers):*/-->
+<!--for (i = 1; i < (rows.length - 1); i++) {-->
+<!--//start by saying there should be no switching:-->
+<!--shouldSwitch = false;-->
+<!--/*Get the two elements you want to compare,-->
+<!--one from current row and one from the next:*/-->
+<!--x = rows[i].getElementsByTagName("TD")[5];-->
+<!--y = rows[i + 1].getElementsByTagName("TD")[5];-->
+<!--console.log(x);-->
+<!--console.log(y);-->
+<!--//check if the two rows should switch place:-->
+<!--if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {-->
+<!--//if so, mark as a switch and break the loop:-->
+<!--shouldSwitch= true;-->
+<!--break;-->
+<!--}-->
+<!--}-->
+<!--if (shouldSwitch) {-->
+<!--/*If a switch has been marked, make the switch-->
+<!--and mark that a switch has been done:*/-->
+<!--rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);-->
+<!--switching = true;-->
+<!--}-->
+<!--}-->
+<!--}-->
+<!--</script>-->
+
+<!--&lt;!&ndash;This works, but I am trying something else&ndash;&gt;-->
+<!--<script>-->
+<!--function sortTableA() {-->
+<!--var table, rows, switching, i, x, y, shouldSwitch;-->
+<!--table = document.getElementById("table");-->
+<!--switching = true;-->
+<!--/*Make a loop that will continue until-->
+<!--no switching has been done:*/-->
+<!--while (switching) {-->
+<!--//start by saying: no switching is done:-->
+<!--switching = false;-->
+<!--rows = table.getElementsByTagName("TR");-->
+<!--/*Loop through all table rows (except the-->
+<!--first, which contains table headers):*/-->
+<!--for (i = 1; i < (rows.length - 1); i++) {-->
+<!--//start by saying there should be no switching:-->
+<!--shouldSwitch = false;-->
+<!--/*Get the two elements you want to compare,-->
+<!--one from current row and one from the next:*/-->
+<!--x = rows[i].getElementsByTagName("TD")[4];-->
+<!--y = rows[i + 1].getElementsByTagName("TD")[4];-->
+<!--//check if the two rows should switch place:-->
+
+<!--console.log(x.innerHTML);-->
+<!--console.log(y.innerHTML);-->
+
+
+<!--if (x.innerHTML < y.innerHTML) {-->
+<!--//if so, mark as a switch and break the loop:-->
+<!--shouldSwitch= true;-->
+<!--break;-->
+<!--}-->
+<!--}-->
+<!--if (shouldSwitch) {-->
+<!--/*If a switch has been marked, make the switch-->
+<!--and mark that a switch has been done:*/-->
+<!--rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);-->
+<!--switching = true;-->
+<!--}-->
+<!--}-->
+<!--}-->
+<!--</script>-->
+
+<!--<script>-->
+<!--var table=document.getElementById("table"), sumVal;-->
+
+<!--for (var i = 1; i < tasks.length; i++)-->
+<!--{-->
+<!--sumVal = sumVal + parseInt(table.rows[i].cells[2].innerHTML);-->
+<!--}-->
+
+<!--console.log(sumVal)-->
+
+<!--</script>-->
+
+<!--This one was not working-->
+<!--http://jsfiddle.net/katalin_2003/9x6bysLs/-->
+<!--<script>-->
+<!--var table = $('table');-->
+
+<!--//   $('#facility_header, #city_header, #phone, #spec')-->
+<!--$('.sortable')-->
+<!--.wrapInner('<span title="sort this column"/>')-->
+<!--.each(function(){-->
+
+<!--var th = $(this),-->
+<!--thIndex = th.index(),-->
+<!--inverse = false;-->
+
+<!--th.click(function(){-->
+
+<!--table.find('td').filter(function(){-->
+
+<!--return $(this).index() === thIndex;-->
+
+<!--}).sortElements(function(a, b){-->
+
+<!--return $.text([a]) > $.text([b]) ?-->
+<!--inverse ? -1 : 1-->
+<!--: inverse ? 1 : -1;-->
+
+<!--}, function(){-->
+
+<!--// parentNode is the element we want to move-->
+<!--return this.parentNode;-->
+
+<!--});-->
+<!--inverse = !inverse;-->
+<!--});-->
+<!--});-->
+<!--</script>-->
+
+<!-- Modal form added here.  Used W3 schools tutorial for modal. -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+
+        <form action="/updateExpense" method="POST" th:action="@{/updateExpense}">
+
+            <p>Hello, testing</p>
+            <input id="modal-edit-id" name="id" type="hidden" class="form-control"/>
+            <input id="modal-edit-description" name="description" type="text" placeholder="description" class="form-control"/>
+            <input id="modal-edit-date" name="dayt" type = "date" placeholder="date" />
+
+            <button type="submit">Update</button>
+
+
+            <!--<input type="text" class="form-control" name="prodName" th:value="${task.description}" />-->
+
+
+
+        </form>
+
+
+    </div>
+
+</div>
+<br><br>
+
+<br>
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<a href="/">Add a new expense</a><br>
+<a href="/categoriesTable">Go to Categories Table</a><br>
+
+
+<script src="js/modals.js"></script>
+<script type="text/javascript" src="js/modals.js"></script>
+
+
+</body>
+</html>

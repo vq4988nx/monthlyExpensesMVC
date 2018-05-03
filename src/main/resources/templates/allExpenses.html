@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Milligram stylesheet -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+
+
+    <title>Spending Events</title>
+
+</head>
+<body>
+<h1>Spending Events Table</h1>
+
+<!--The template is using the variable for the tasks.size object of this particular task-->
+<h2 th:text = "${expenses.size()} + ' task(s) to do' ">List of Expenses</h2>
+
+<ul>
+    <li th:each="expense: ${expenses}">
+        <span th:text="${expense.text}"></span>
+    </li>
+</ul>
+
+<a href="/">Add a new expense</a>
+
+</body>
+</html>
+
+

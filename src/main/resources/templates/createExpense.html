@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Expenses</title>
+</head>
+<body>
+
+</body>
+</html><html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Milligram stylesheet -->
+    <!--<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">-->
+    <!--<link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">-->
+    <!--<link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">-->
+
+
+
+    <title>Monthly Spending</title>
+</head>
+<body>
+<h1>Enter a new spending event</h1>
+
+<!--This is doing a POST to the /addTask page.  It is inserting the current task object-->
+<form action="#" method="POST" th:action="@{/addExpense}" th:object="${expense}">
+    <input type = "date" placeholder="date" th:field="*{dayt}" />
+    <br><br>
+    <input type = "text" placeholder="amount" th:field="*{amount}" />
+    <br><br>
+    <input type = "text" placeholder="description" th:field="*{description}" />
+    <br><br>
+
+    <select name = "category" th:field="*{category}">
+        <option value="" disabled selected>Select Category</option>
+        <option value="Target">Target</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Pets">Pets</option>
+        <option value="Mortgage/Rent">Mortgage/Rent</option>
+        <option value="Utilities">Utilities</option>
+    </select>
+    <br><br>
+
+    <br>
+    <button id = "add-expense">Add Expense</button>
+
+</form>
+
+<a href="/allExpenses">All Expenses</a>
+</body>
+
+
+
+
+
+
+
+
+
+
+</html>
