@@ -4,6 +4,7 @@ import com.jeff.monthlyexpense.model.Expense;
 import com.jeff.monthlyexpense.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,11 @@ public class ExpenseController {
     @Autowired
     public ExpenseController(ExpenseRepository expenses) {
         this.expenses = expenses;
+        
+        expenses.save(new Expense(new Date(), 50, "Stuff", "Target"));
+        expenses.save(new Expense(new Date(), 101, "More Stuff", "Target"));
+        expenses.save(new Expense(new Date(), 22, "Even more Stuff", "Target"));
+        
     }
 
     //This will always direct to the home page
@@ -47,8 +53,13 @@ public class ExpenseController {
 
     //    new mapping, experiment
     @RequestMapping("/categoriesTable")
-    public ModelAndView categoriesTable() {
-        return new ModelAndView("categoriesTable.html", "expense", new Expense());
+    public String categoriesTable(Model model) {
+        double totalExpenses = expenses.getTotalExpensesByCategory("Target");
+        // if there's no Target expenses, this returns null, so check for null. Adding nulls to the model causes an exception.
+        System.out.println("total expenses at target " + totalExpenses);
+        model.addAttribute("totalExpenses", totalExpenses);
+        return "categoriesTable.html";
+//        return new ModelAndView("categoriesTable.html", "expense", new Expense());
     }
 
 
