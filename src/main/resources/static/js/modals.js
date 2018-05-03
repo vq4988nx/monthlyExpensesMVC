@@ -15,12 +15,16 @@ allModifyButtons.forEach(function(button){
         var selectedExpenseId = document.getElementById('expense-id-' + id);
         var selectedExpenseDate = document.getElementById('expense-date-' + id);
         var selectedExpenseDescription = document.getElementById('expense-description-' + id);
+        var selectedExpenseAmount = document.getElementById('expense-amount-' + id);
+        var selectedExpenseCategory = document.getElementById('expense-category-' + id);
         // todo get the amount, category too, if needed
 
         // set the values in the form
         document.getElementById("modal-edit-id").value = id;
         document.getElementById("modal-edit-date").value = selectedExpenseDate.innerText.split(' ')[0];  // read the date part, not the time. Ick, hacky. There's probably a nicer way to do this.
         document.getElementById("modal-edit-description").value = selectedExpenseDescription.innerText;
+        document.getElementById("modal-edit-amount").value = selectedExpenseAmount.innerText;
+        document.getElementById("modal-edit-category").value = selectedExpenseCategory.innerText;
 
     });
 });

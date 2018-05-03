@@ -39,13 +39,15 @@
     </tr>
     <tr th:each="expense : ${expenses}">
         <td><button class="modify-button" th:id="'modify-button-' + ${expense.id}" >Modify Entry</button></td>
-        <td><a th:id="'delete-'+${expense.id}">Delete Entry</button></a></td>
         <!--<td><button id="myBtnn">Delete Entry</button></td>-->
+        <td><a th:href="'/delete/' + ${expense.id}"button id="myBtnn">Delete Entry</button></a></td>
         <td th:id="'expense-id-'+${expense.id}" th:text="${expense.id}"></td>
         <td th:id="'expense-date-'+${expense.id}" th:text="${expense.dayt}"></td>
-        <td th:text="${expense.amount}" class="rowDataSd"></td>
+        <td th:id="'expense-amount-'+${expense.id}" th:text="${expense.amount}"></td>
+        <!--<td th:text="${expense.amount}" class="rowDataSd"></td>-->
         <td th:id="'expense-description-'+${expense.id}" th:text="${expense.description}"></td>
-        <td th:text="${expense.category}"></td>
+        <td th:id="'expense-category-'+${expense.id}" th:text="${expense.category}"></td>
+        <!--<td th:text="${expense.category}"></td>-->
 
 
 
@@ -302,6 +304,8 @@ switching = true;
             <input id="modal-edit-id" name="id" type="hidden" class="form-control"/>
             <input id="modal-edit-description" name="description" type="text" placeholder="description" class="form-control"/>
             <input id="modal-edit-date" name="dayt" type = "date" placeholder="date" />
+            <input id="modal-edit-amount" name="amount" type = "text" placeholder="amount" />
+            <input id="modal-edit-category" name="category" type = "text" placeholder="category" />
 
             <button type="submit">Update</button>
 
