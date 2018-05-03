@@ -44,3 +44,8 @@ a {
     text-decoration: none;
     cursor: pointer;
 }
+
+#val {
+    color: blue;
+    background-color: pink;
+}

@@ -19,12 +19,13 @@
 
 <h2>Total Amount Spent</h2>
 
+<!--This is printing the sum, javascript below-->
+<span id="val"></span>
+
 <span id="value"></span>
 
-<p>Click the button to sort the table alphabetically, by name:</p>
 <p><button onclick="sortTableD()">Sort by Description</button></p>
 
-<p>Click the button to sort the table alphabetically, by name:</p>
 <p><button onclick="sortTableA()">Sort by amount</button></p>
 
 <table id = "table">
@@ -55,7 +56,7 @@
 
 </table>
 
-<span id="val"></span>
+
 
 
 <!--This js gets the total of the amount column.-->
@@ -71,7 +72,7 @@
         sumVal = sumVal + parseInt(table.rows[i].cells[4].innerHTML);
     }
 
-    document.getElementById("val").innerHTML = "Sum Value = $" + sumVal;
+    document.getElementById("val").innerHTML = "Total spending this month is $" + sumVal;
     console.log(sumVal);
 
 </script>
@@ -300,12 +301,19 @@ switching = true;
 
         <form action="/updateExpense" method="POST" th:action="@{/updateExpense}">
 
-            <p>Hello, testing</p>
             <input id="modal-edit-id" name="id" type="hidden" class="form-control"/>
             <input id="modal-edit-description" name="description" type="text" placeholder="description" class="form-control"/>
             <input id="modal-edit-date" name="dayt" type = "date" placeholder="date" />
             <input id="modal-edit-amount" name="amount" type = "text" placeholder="amount" />
-            <input id="modal-edit-category" name="category" type = "text" placeholder="category" />
+            <!--<input id="modal-edit-category" name="category" type = "text" placeholder="category" />-->
+            <select id="modal-edit-category" name = "category">
+                <option value="" disabled selected>Select Category</option>
+                <option value="Target">Target</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Pets">Pets</option>
+                <option value="Mortgage/Rent">Mortgage/Rent</option>
+                <option value="Utilities">Utilities</option>
+            </select>
 
             <button type="submit">Update</button>
 
