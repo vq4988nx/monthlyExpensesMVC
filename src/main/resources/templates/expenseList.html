@@ -10,6 +10,8 @@
     <!--Custom stylesheet-->
     <link rel="stylesheet" href="css/style.css" type="text/css">
 
+
+
     <title>Spending Events</title>
 
 </head>
@@ -28,25 +30,32 @@
 
 <p><button onclick="sortTableA()">Sort by amount</button></p>
 
+<p><button onclick="sortTableC()">Sort by category</button></p>
+
+
+
 <table id = "table">
     <tr>
-        <th>.</th>
-        <th>.</th>
+        <th></th>
+        <th></th>
         <th>ID</th>
         <th>DATE</th>
-        <th>AMOUNT</th>
-        <th>DESCRIPTION</th>
-        <th>CATEGORY</th>
+        <th>AMOUNT($)</th>
+        <th onclick="sortTable(5)">DESCRIPTION</th>
+        <th onclick="sortTable(6)">CATEGORY</th>
     </tr>
     <tr th:each="expense : ${expenses}">
         <td><button class="modify-button" th:id="'modify-button-' + ${expense.id}" >Modify Entry</button></td>
         <!--<td><button id="myBtnn">Delete Entry</button></td>-->
         <td><a th:href="'/delete/' + ${expense.id}"button id="myBtnn">Delete Entry</button></a></td>
         <td th:id="'expense-id-'+${expense.id}" th:text="${expense.id}"></td>
-        <td th:id="'expense-date-'+${expense.id}" th:text="${expense.dayt}"></td>
-        <td th:id="'expense-amount-'+${expense.id}" th:text="${expense.amount}"></td>
-        <!--<td th:text="${expense.amount}" class="rowDataSd"></td>-->
-        <td th:id="'expense-description-'+${expense.id}" th:text="${expense.description}"></td>
+        <!--th:text is creating a substring of the date that is splitting it from the index of 5-10 so the year, as well as the time stamp is cut out-->
+        <td th:id="'expense-date-'+${expense.id}" th:text="${#strings.substring(expense.dayt,5,10)}"></td>
+        <!--numbers.formatDecimal is taking the amount and making it be 2 decimal points.-->
+        <!--Added '$' + to put a $ sign in front of the amount, but it makes the sum be NaN-->
+        <td th:id="'expense-amount-'+${expense.id}" th:text="${#numbers.formatDecimal(expense.amount, 0, 2)}"</td>
+        <!--th:text is capitalizing all of the descriptions-->
+        <td th:id="'expense-description-'+${expense.id}" th:text="${#strings.capitalize(expense.description)}"></td>
         <td th:id="'expense-category-'+${expense.id}" th:text="${expense.category}"></td>
         <!--<td th:text="${expense.category}"></td>-->
 
@@ -158,6 +167,103 @@ switching = true;
 }
 }
 }
+</script>
+
+
+<script>
+    function sortTableC() {
+        var table, rows, switching, i, x, y, shouldSwitch;
+        table = document.getElementById("table");
+        switching = true;
+        /*Make a loop that will continue until
+        no switching has been done:*/
+        while (switching) {
+//start by saying: no switching is done:
+            switching = false;
+            rows = table.getElementsByTagName("TR");
+            /*Loop through all table rows (except the
+            first, which contains table headers):*/
+            for (i = 1; i < (rows.length - 1); i++) {
+//start by saying there should be no switching:
+                shouldSwitch = false;
+                /*Get the two elements you want to compare,
+                one from current row and one from the next:*/
+                x = rows[i].getElementsByTagName("TD")[5];
+                y = rows[i + 1].getElementsByTagName("TD")[5];
+                console.log(x);
+                console.log(y);
+//check if the two rows should switch place:
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+//if so, mark as a switch and break the loop:
+                    shouldSwitch= true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                /*If a switch has been marked, make the switch
+                and mark that a switch has been done:*/
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+    }
+</script>
+
+<script>
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("table");
+        switching = true;
+        //Set the sorting direction to ascending:
+        dir = "asc";
+        /*Make a loop that will continue until
+        no switching has been done:*/
+        while (switching) {
+            //start by saying: no switching is done:
+            switching = false;
+            rows = table.getElementsByTagName("TR");
+            /*Loop through all table rows (except the
+            first, which contains table headers):*/
+            for (i = 1; i < (rows.length - 1); i++) {
+                //start by saying there should be no switching:
+                shouldSwitch = false;
+                /*Get the two elements you want to compare,
+                one from current row and one from the next:*/
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                /*check if the two rows should switch place,
+                based on the direction, asc or desc:*/
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch= true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch= true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                /*If a switch has been marked, make the switch
+                and mark that a switch has been done:*/
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                //Each time a switch is done, increase this count by 1:
+                switchcount ++;
+            } else {
+                /*If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again.*/
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
 </script>
 
 <!--This works, but I am trying something else-->
