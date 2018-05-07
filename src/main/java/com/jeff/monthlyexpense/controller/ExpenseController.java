@@ -29,7 +29,7 @@ public class ExpenseController {
         expenses.save(new Expense(new Date(), 101, "More Stuff", "Target"));
         expenses.save(new Expense(new Date(), 22, "Even more Stuff", "Target"));
         expenses.save(new Expense(new Date(), 22, "Even more Stuff", "Clothing"));
-        
+        expenses.save(new Expense(new Date(), 150, "Collars and Leashes", "Pets"));
     }
 
     //This will always direct to the home page
@@ -59,10 +59,18 @@ public class ExpenseController {
         // if there's no Target expenses, this returns null, so check for null. Adding nulls to the model causes an exception.
         System.out.println("total expenses at target " + totalExpensesTarget);
         model.addAttribute("totalExpensesTarget", totalExpensesTarget);
+
         double totalExpensesClothing = expenses.getTotalExpensesByCategory("Clothing");
-        // if there's no Target expenses, this returns null, so check for null. Adding nulls to the model causes an exception.
         System.out.println("total expenses for clothing " + totalExpensesClothing);
         model.addAttribute("totalExpensesClothing", totalExpensesClothing);
+
+
+        double totalExpensesPets = expenses.getTotalExpensesByCategory("Pets");
+        System.out.println("total expenses for pets " + totalExpensesPets);
+        model.addAttribute("totalExpensesPets", totalExpensesPets);
+
+
+
         return "categoriesTable.html";
 //        return new ModelAndView("categoriesTable.html", "expense", new Expense());
     }
@@ -75,6 +83,16 @@ public class ExpenseController {
         expenses.deleteById(id);
         return "redirect:/allExpenses";
     }
+
+    //    Trying to make this deleteAll method
+    @RequestMapping(path = "/deleteAll", method = RequestMethod.GET)
+    public String deleteAllExpense() {
+//        System.out.println(id);
+        expenses.deleteAll();
+        return "redirect:/allExpenses";
+    }
+
+
 
     @RequestMapping("/expenseList")
     public ModelAndView backToTaskList(ModelMap modelMap) {

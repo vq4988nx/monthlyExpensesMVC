@@ -33,21 +33,26 @@
 <p><button onclick="sortTableC()">Sort by category</button></p>
 
 
+<p><a th:href="'/deleteAll/'"  class="button button-clear">Delete All</a> </p>
+<!--<button type="button" class="btn btn-danger">deletebutton</button>-->
 
 <table id = "table">
     <tr>
         <th></th>
         <th></th>
         <th>ID</th>
-        <th>DATE</th>
-        <th>AMOUNT($)</th>
+        <th onclick="sortTable(3)">DATE</th>
+        <th onclick="sortTable(4)">AMOUNT($)</th>
         <th onclick="sortTable(5)">DESCRIPTION</th>
         <th onclick="sortTable(6)">CATEGORY</th>
     </tr>
     <tr th:each="expense : ${expenses}">
         <td><button class="modify-button" th:id="'modify-button-' + ${expense.id}" >Modify Entry</button></td>
+
         <!--<td><button id="myBtnn">Delete Entry</button></td>-->
-        <td><a th:href="'/delete/' + ${expense.id}"button id="myBtnn">Delete Entry</button></a></td>
+
+        <td><a th:href="'/delete/' + ${expense.id}" class="button button-outline">Delete Entry</button></a></td>
+
         <td th:id="'expense-id-'+${expense.id}" th:text="${expense.id}"></td>
         <!--th:text is creating a substring of the date that is splitting it from the index of 5-10 so the year, as well as the time stamp is cut out-->
         <td th:id="'expense-date-'+${expense.id}" th:text="${#strings.substring(expense.dayt,5,10)}"></td>

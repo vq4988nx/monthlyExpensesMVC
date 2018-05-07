@@ -15,9 +15,11 @@
 
 <h1>Temporarily Sample Category Table</h1>
 
+<button onclick="myFunction()">Try it</button>
 
 <span>The total for Target for the month is $<span th:text="${totalExpensesTarget}"></span></span><br>
-<span>The total for clothing for the month is $<span th:text="${totalExpensesClothing}"></span></span>
+<span>The total for clothing for the month is $<span th:text="${totalExpensesClothing}"></span></span><br>
+<span>The total for pets for the month is $<span th:text="${totalExpensesPets}"></span></span>
 
 <table>
     <tr>
@@ -29,9 +31,9 @@
 
     <tr>
         <td>TARGET</td>
-        <td><span>$<span th:text="${totalExpensesTarget}"></span></span></td>
-        <td>800</td>
-        <td>0</td>
+        <td><span>$<span th:text="${totalExpensesTarget}" id="test1"></span></span></td>
+        <td id="test2">800</td>
+        <td id="test3"></td>
     </tr>
     <tr>
         <td>CLOTHING</td>
@@ -60,6 +62,33 @@
     <!--<td th:text="${task.category}"></td>-->
 
     <!--</tr>-->
+
+    <script>
+
+        function myFunction () {
+
+
+        tast1 = document.getElementById(test1);
+        tust1 = Number(tast1)
+        tast2 = document.getElementById(test2);
+        tust2 = Number(tast2)
+        tust3 = tust2 - tust1;
+        document.getElementById("test3").innerHTML = tust3;
+        console.log(test1);
+        console.log(tast1);
+        console.log(tust1);
+        console.log(test2);
+        console.log(tast2);
+        console.log(tust2);
+        console.log(tust3);
+        console.log(typeof test1);
+        console.log(typeof test2);
+
+
+
+        }
+
+    </script>
 
 </table>
 
