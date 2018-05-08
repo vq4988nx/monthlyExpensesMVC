@@ -30,38 +30,73 @@
     </tr>
 
     <tr>
-        <td>TARGET</td>
-        <td><span>$<span th:text="${totalExpensesTarget}" id="test1"></span></span></td>
+        <td>MORTGAGE/RENT</td>
+        <td><span>$<span th:text="${totalExpensesMortgageRent}" id="test1"></span></span></td>
         <td id="test2">800</td>
         <td id="test3"></td>
     </tr>
     <tr>
-        <td>CLOTHING</td>
-        <td><span>$<span th:text="${totalExpensesClothing}"></span></span></td>
+        <td>MONTHLY BILLS</td>
+        <td><span>$<span th:text="${totalExpensesMonthlyBills}"></span></span></td>
         <td>338</td>
         <td>+60</td>
     </tr>
     <tr>
         <td>EATING OUT</td>
-        <td>125</td>
+        <td><span>$<span th:text="${totalExpensesEatingOut}"></span></span></td>
         <td>85</td>
         <td>-40</td>
     </tr>
     <tr>
+        <td>GROCERIES/TARGET</td>
+        <td><span>$<span th:text="${totalExpensesGroceriesTarget}"></span></span></td>
+        <td>100</td>
+        <td>100</td>
+    </tr>
+    <tr>
+        <td>MEDICAL</td>
+        <td><span>$<span th:text="${totalExpensesMedical}"></span></span></td>
+        <td>100</td>
+        <td>100</td>
+    </tr>
+    <tr>
         <td>PETS</td>
-        <td>0</td>
+        <td><span>$<span th:text="${totalExpensesPets}"></span></span></td>
+        <td>100</td>
+        <td>100</td>
+    </tr>
+    <tr>
+        <td>ENTERTAINMENT</td>
+        <td><span>$<span th:text="${totalExpensesEntertainment}"></span></span></td>
+        <td>100</td>
+        <td>100</td>
+    </tr>
+    <tr>
+        <td>TRAVEL</td>
+        <td><span>$<span th:text="${totalExpensesTravel}"></span></span></td>
+        <td>100</td>
+        <td>100</td>
+    </tr>
+    <tr>
+        <td>AMAZON</td>
+        <td><span>$<span th:text="${totalExpensesAmazon}"></span></span></td>
+        <td>100</td>
+        <td>100</td>
+    </tr>
+    <tr>
+        <td>GIFTS</td>
+        <td><span>$<span th:text="${totalExpensesGifts}"></span></span></td>
+        <td>100</td>
+        <td>100</td>
+    </tr>
+    <tr>
+        <td>CLOTHING</td>
+        <td><span>$<span th:text="${totalExpensesClothing}"></span></span></td>
         <td>100</td>
         <td>100</td>
     </tr>
 
 
-    <!--<tr th:each="task : ${tasks}">-->
-    <!--<td th:text="${task.dayt}"></td>-->
-    <!--<td th:text="${task.amount}"></td>-->
-    <!--<td th:text="${task.description}"></td>-->
-    <!--<td th:text="${task.category}"></td>-->
-
-    <!--</tr>-->
 
     <script>
 
@@ -69,9 +104,9 @@
 
 
         tast1 = document.getElementById(test1);
-        tust1 = Number(tast1)
+        tust1 = Number(tast1);
         tast2 = document.getElementById(test2);
-        tust2 = Number(tast2)
+        tust2 = Number(tast2);
         tust3 = tust2 - tust1;
         document.getElementById("test3").innerHTML = tust3;
         console.log(test1);
