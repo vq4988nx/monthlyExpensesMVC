@@ -75,15 +75,8 @@ public class Expense {
     public void setCategory(String category) {
         this.category = category;
     }
-    //    private boolean urgent;
 
-//    This is the constructor for the task object
-//    public Task(String text, boolean urgent) {
-//        this.text = text;
-//        this.urgent = urgent;
-//    }
 
-    //    These are the getters and setters for the task object
     public Long getId() {
         return id;
     }
@@ -92,21 +85,7 @@ public class Expense {
         this.id = id;
     }
 
-//    public String getText() {
-//        return text;
-//    }
-//
-//    public void setText(String text) {
-//        this.text = text;
-//    }
-//
-//    public boolean isUrgent() {
-//        return urgent;
-//    }
-//
-//    public void setUrgent(boolean urgent) {
-//        this.urgent = urgent;
-//    }
+
 
     public Expense() {}
 

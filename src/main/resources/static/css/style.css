@@ -45,9 +45,25 @@ a {
     cursor: pointer;
 }
 
-#val {
-    color: blue;
-    background-color: pink;
+#valCenter {
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+}
+
+#canter {
+    margin: auto;
+    width: 80%;
+    padding: 10px;
+    padding-left: 40px;
+
+}
+
+#squeeze {
+    margin: auto;
+    width: 25%;
 }
 
 

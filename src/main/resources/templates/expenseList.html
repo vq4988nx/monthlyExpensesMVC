@@ -10,37 +10,62 @@
     <!--Custom stylesheet-->
     <link rel="stylesheet" href="css/style.css" type="text/css">
 
+    <script src="js/modals.js"></script>
+    <script type="text/javascript" src="js/modals.js"></script>
 
+    <script src="js/verifyDeleteAll.js"></script>
+    <script type="text/javascript" src="js/verifyDeleteAll.js"></script>
 
     <title>Spending Events</title>
 
 </head>
 <body>
 
-<h1>Spending Events Table</h1>
+<h1 class="center">Spending Events Table</h1>
 
-<h2>Total Amount Spent</h2>
+<div id="canter">
+<a href="/" class="button button-outline">Add New Expense</a>
+<a href="/allExpenses" class="button button-outline">Spending Events Table</a>
+<a href="/categoriesTable" class="button button-outline">Categories Table</a>
+<a th:href="'/deleteAll/'" class="button button-outline" id="delete_button">Delete All Entries</a>
+</div>
+<br><br>
+
+
+<!--<a class="button" href="/" class="button button-clear">Add a new expense</a>-->
+<!--<a class="button" href="/categoriesTable" class="button button-clear">Go to Categories Table</a>-->
+<!--<a class="button" href="/" class="button button-clear">Add a new expense</a>-->
+
+
+<!--<button class="button button-outline">Outlined Button</button>-->
+
+
+<!--<input class="button button-clear" type="submit" value="Clear Button">-->
+<!--<input class="button button-clear" type="submit" value="Clear Button">-->
+
 
 <!--This is printing the sum, javascript below-->
-<span id="val"></span>
+<h2 id="valCenter"><span id="val" ></span></h2>
+<h5 class="center">Click on Table Header to sort</h5>
 
-<span id="value"></span>
+<!--Don't think this is doing anything.  Commenting it out-->
+<!--<span id="value"></span>-->
 
-<p><button onclick="sortTableD()">Sort by Description</button></p>
+<!--<p><button onclick="sortTableD()">Sort by Description</button></p>-->
 
-<p><button onclick="sortTableA()">Sort by amount</button></p>
+<!--<p><button onclick="sortTableA()">Sort by amount</button></p>-->
 
-<p><button onclick="sortTableC()">Sort by category</button></p>
+<!--<p><button onclick="sortTableC()">Sort by category</button></p>-->
 
 
-<p><a th:href="'/deleteAll/'"  class="button button-clear">Delete All</a> </p>
+<p></p>
 <!--<button type="button" class="btn btn-danger">deletebutton</button>-->
 
 <table id = "table">
     <tr>
         <th></th>
         <th></th>
-        <th>ID</th>
+        <!--<th>ID</th>-->
         <th onclick="sortTable(3)">DATE</th>
         <th onclick="sortTable(4)">AMOUNT($)</th>
         <th onclick="sortTable(5)">DESCRIPTION</th>
@@ -51,9 +76,10 @@
 
         <!--<td><button id="myBtnn">Delete Entry</button></td>-->
 
-        <td><a th:href="'/delete/' + ${expense.id}" class="button button-outline">Delete Entry</button></a></td>
+        <td><a th:href="'/delete/' + ${expense.id}" class="button">Delete Entry</button></a></td>
 
-        <td th:id="'expense-id-'+${expense.id}" th:text="${expense.id}"></td>
+        <!--Hiding the expense ID-->
+        <td th:id="'expense-id-'+${expense.id}" hidden th:text="${expense.id}"></td>
         <!--th:text is creating a substring of the date that is splitting it from the index of 5-10 so the year, as well as the time stamp is cut out-->
         <td th:id="'expense-date-'+${expense.id}" th:text="${#strings.substring(expense.dayt,5,10)}"></td>
         <!--numbers.formatDecimal is taking the amount and making it be 2 decimal points.-->
@@ -70,7 +96,7 @@
 
 </table>
 
-
+<!--<a th:href="'/deleteAll/'"  class="button button-outline">DELETE ALL ENTRIES</a></p>-->
 
 
 <!--This js gets the total of the amount column.-->
@@ -86,7 +112,7 @@
         sumVal = sumVal + parseInt(table.rows[i].cells[4].innerHTML);
     }
 
-    document.getElementById("val").innerHTML = "Total spending this month is $" + sumVal;
+    document.getElementById("val").innerHTML = "TOTAL: $" + sumVal;
     console.log(sumVal);
 
 </script>
@@ -271,137 +297,25 @@ switching = true;
     }
 </script>
 
-<!--This works, but I am trying something else-->
-<!--<script>-->
-<!--function sortTableD() {-->
-<!--var table, rows, switching, i, x, y, shouldSwitch;-->
-<!--table = document.getElementById("table");-->
-<!--switching = true;-->
-<!--/*Make a loop that will continue until-->
-<!--no switching has been done:*/-->
-<!--while (switching) {-->
-<!--//start by saying: no switching is done:-->
-<!--switching = false;-->
-<!--rows = table.getElementsByTagName("TR");-->
-<!--/*Loop through all table rows (except the-->
-<!--first, which contains table headers):*/-->
-<!--for (i = 1; i < (rows.length - 1); i++) {-->
-<!--//start by saying there should be no switching:-->
-<!--shouldSwitch = false;-->
-<!--/*Get the two elements you want to compare,-->
-<!--one from current row and one from the next:*/-->
-<!--x = rows[i].getElementsByTagName("TD")[5];-->
-<!--y = rows[i + 1].getElementsByTagName("TD")[5];-->
-<!--console.log(x);-->
-<!--console.log(y);-->
-<!--//check if the two rows should switch place:-->
-<!--if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {-->
-<!--//if so, mark as a switch and break the loop:-->
-<!--shouldSwitch= true;-->
-<!--break;-->
-<!--}-->
-<!--}-->
-<!--if (shouldSwitch) {-->
-<!--/*If a switch has been marked, make the switch-->
-<!--and mark that a switch has been done:*/-->
-<!--rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);-->
-<!--switching = true;-->
-<!--}-->
-<!--}-->
-<!--}-->
-<!--</script>-->
+<script>
+var deleteButtons = document.getElementById("delete_button");
 
-<!--&lt;!&ndash;This works, but I am trying something else&ndash;&gt;-->
-<!--<script>-->
-<!--function sortTableA() {-->
-<!--var table, rows, switching, i, x, y, shouldSwitch;-->
-<!--table = document.getElementById("table");-->
-<!--switching = true;-->
-<!--/*Make a loop that will continue until-->
-<!--no switching has been done:*/-->
-<!--while (switching) {-->
-<!--//start by saying: no switching is done:-->
-<!--switching = false;-->
-<!--rows = table.getElementsByTagName("TR");-->
-<!--/*Loop through all table rows (except the-->
-<!--first, which contains table headers):*/-->
-<!--for (i = 1; i < (rows.length - 1); i++) {-->
-<!--//start by saying there should be no switching:-->
-<!--shouldSwitch = false;-->
-<!--/*Get the two elements you want to compare,-->
-<!--one from current row and one from the next:*/-->
-<!--x = rows[i].getElementsByTagName("TD")[4];-->
-<!--y = rows[i + 1].getElementsByTagName("TD")[4];-->
-<!--//check if the two rows should switch place:-->
+for (var x=0; x < deleteButtons.length; x++) {
+deleteButtons[x].addEventListener("click", function(event) {
+var sure = confirm("Did you actually do that?");
+if (!sure) {
+event.preventDefault();
+}
+});
+}
 
-<!--console.log(x.innerHTML);-->
-<!--console.log(y.innerHTML);-->
-
-
-<!--if (x.innerHTML < y.innerHTML) {-->
-<!--//if so, mark as a switch and break the loop:-->
-<!--shouldSwitch= true;-->
-<!--break;-->
-<!--}-->
-<!--}-->
-<!--if (shouldSwitch) {-->
-<!--/*If a switch has been marked, make the switch-->
-<!--and mark that a switch has been done:*/-->
-<!--rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);-->
-<!--switching = true;-->
-<!--}-->
-<!--}-->
-<!--}-->
-<!--</script>-->
-
-<!--<script>-->
-<!--var table=document.getElementById("table"), sumVal;-->
-
-<!--for (var i = 1; i < tasks.length; i++)-->
-<!--{-->
-<!--sumVal = sumVal + parseInt(table.rows[i].cells[2].innerHTML);-->
-<!--}-->
-
-<!--console.log(sumVal)-->
-
-<!--</script>-->
-
-<!--This one was not working-->
-<!--http://jsfiddle.net/katalin_2003/9x6bysLs/-->
-<!--<script>-->
-<!--var table = $('table');-->
-
-<!--//   $('#facility_header, #city_header, #phone, #spec')-->
-<!--$('.sortable')-->
-<!--.wrapInner('<span title="sort this column"/>')-->
-<!--.each(function(){-->
-
-<!--var th = $(this),-->
-<!--thIndex = th.index(),-->
-<!--inverse = false;-->
-
-<!--th.click(function(){-->
-
-<!--table.find('td').filter(function(){-->
-
-<!--return $(this).index() === thIndex;-->
-
-<!--}).sortElements(function(a, b){-->
-
-<!--return $.text([a]) > $.text([b]) ?-->
-<!--inverse ? -1 : 1-->
-<!--: inverse ? 1 : -1;-->
-
-<!--}, function(){-->
-
-<!--// parentNode is the element we want to move-->
-<!--return this.parentNode;-->
-
-<!--});-->
-<!--inverse = !inverse;-->
-<!--});-->
-<!--});-->
-<!--</script>-->
+delete_button.addEventListener("click", function(event){
+var sure = confirm("Delete all entries?");
+if (!sure) {
+event.preventDefault();   // don't actually click the button or send a request to the server.
+}
+});
+</script>
 
 <!-- Modal form added here.  Used W3 schools tutorial for modal. -->
 <div id="myModal" class="modal">
@@ -457,12 +371,10 @@ switching = true;
 </div>
 
 
-<a href="/">Add a new expense</a><br>
-<a href="/categoriesTable">Go to Categories Table</a><br>
 
 
-<script src="js/modals.js"></script>
-<script type="text/javascript" src="js/modals.js"></script>
+
+
 
 
 </body>

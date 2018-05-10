@@ -21,6 +21,7 @@ public class ExpenseController {
     //This task object will interact with the database
     private final ExpenseRepository expenses;
 
+//    Sample data here
     @Autowired
     public ExpenseController(ExpenseRepository expenses) {
         this.expenses = expenses;
@@ -61,21 +62,22 @@ public class ExpenseController {
         return new ModelAndView("createExpense.html", "expense", new Expense());
     }
 
-    //This is a post method that will redirect to the /addTask page
+    //This is a post method that will redirect to the /addExpense page
     @RequestMapping(value="/addExpense", method= RequestMethod.POST)
     public RedirectView addNewExpense(Expense expense) {
         expenses.save(expense);
         return new RedirectView("/allExpenses");
     }
 
-    //This will direct to the /allTasks page, where the database will be queried for all tasks
+
+//    this returns the updated expenseList page
     @RequestMapping("/allExpenses")
     public ModelAndView allTasks(ModelMap modelMap){
         modelMap.addAttribute("expenses", expenses.findAll());
         return new ModelAndView("expenseList.html", modelMap);
     }
 
-    //    new mapping, experiment
+    //This mapping is for the categoriesTable.  Each category is returning the total for the category
     @RequestMapping("/categoriesTable")
     public String categoriesTable(Model model) {
         double totalExpensesMortgageRent = expenses.getTotalExpensesByCategory("Mortgage/Rent");
@@ -116,17 +118,10 @@ public class ExpenseController {
 //        return new ModelAndView("categoriesTable.html", "expense", new Expense());
 
 
-
-
-
-
-
-
-
     }
 
 
-    //    Trying to fix this delete method
+    //    This will delete an individual expense item, and return to the allExpense page
     @RequestMapping(path = "/delete/{id}", method = RequestMethod.GET)
     public String deleteExpense(@PathVariable(name = "id") Long id) {
         System.out.println(id);
@@ -134,7 +129,7 @@ public class ExpenseController {
         return "redirect:/allExpenses";
     }
 
-    //    Trying to make this deleteAll method
+    //    This will delete all expense items
     @RequestMapping(path = "/deleteAll", method = RequestMethod.GET)
     public String deleteAllExpense() {
 //        System.out.println(id);
@@ -144,14 +139,16 @@ public class ExpenseController {
 
 
 
+//    This returns the updated expenseList page
     @RequestMapping("/expenseList")
     public ModelAndView backToTaskList(ModelMap modelMap) {
         return new ModelAndView("expenseList", modelMap);
     }
 
+
+//    This mapping is for updating an expense
     @PostMapping("/updateExpense")
     public String updateTask(Expense t) {
-        System.out.println(t);  // TODO actually do the update
         expenses.save(t);
         return  "redirect:/allExpenses";
     }

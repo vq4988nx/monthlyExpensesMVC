@@ -7,19 +7,33 @@
     <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
     <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
 
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
+    <script src="js/verifyDeleteAll.js"></script>
+    <script type="text/javascript" src="js/verifyDeleteAll.js"></script>
 
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Categories Table</title>
 </head>
 <body>
 
-<h1>Temporarily Sample Category Table</h1>
+<!--<h1>Temporarily Sample Category Table</h1>-->
 
-<button onclick="myFunction()">Try it</button>
+<h1 class="center">Categories Table</h1>
 
-<span>The total for Target for the month is $<span th:text="${totalExpensesTarget}"></span></span><br>
-<span>The total for clothing for the month is $<span th:text="${totalExpensesClothing}"></span></span><br>
-<span>The total for pets for the month is $<span th:text="${totalExpensesPets}"></span></span>
+<div id="canter">
+    <a href="/" class="button button-outline">Add New Expense</a>
+    <a href="/allExpenses" class="button button-outline">Spending Events Table</a>
+    <a href="/categoriesTable" class="button button-outline">Categories Table</a>
+    <a th:href="'/deleteAll/'" class="button button-outline" id="delete_button">Delete All Entries</a>
+</div>
+<br>
+
+<!--<button onclick="myFunction()">Try it</button>-->
+
+<!--<span>The total for Target for the month is $<span th:text="${totalExpensesTarget}"></span></span><br>-->
+<!--<span>The total for clothing for the month is $<span th:text="${totalExpensesClothing}"></span></span><br>-->
+<!--<span>The total for pets for the month is $<span th:text="${totalExpensesPets}"></span></span>-->
 
 <table>
     <tr>
@@ -96,7 +110,7 @@
         <td>100</td>
     </tr>
 
-
+</table>
 
     <script>
 
@@ -125,10 +139,29 @@
 
     </script>
 
-</table>
 
-<a href="/">Add a new expense</a><br>
-<a href="/allExpenses">All Expenses</a><br>
+    <script>
+        var deleteButtons = document.getElementById("delete_button");
+
+        for (var x=0; x < deleteButtons.length; x++) {
+            deleteButtons[x].addEventListener("click", function(event) {
+                var sure = confirm("Did you actually do that?");
+                if (!sure) {
+                    event.preventDefault();
+                }
+            });
+        }
+
+        delete_button.addEventListener("click", function(event){
+            var sure = confirm("Delete all entries?");
+            if (!sure) {
+                event.preventDefault();   // don't actually click the button or send a request to the server.
+            }
+        });
+    </script>
+
+
+
 
 </body>
 </html>

@@ -12,7 +12,6 @@ public interface ExpenseRepository extends PagingAndSortingRepository<Expense, L
 //    names for method parameters. Use @Param for query method parameters
 //    https://www.petrikainulainen.net/programming/spring-framework/spring-data-jpa-tutorial-introduction-to-query-methods/
 
-
     @Query(value = "select sum(e.amount) from Expense e where e.category=:catName")
     Double getTotalExpensesByCategory(@Param("catName") String catName);
 

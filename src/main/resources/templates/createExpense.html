@@ -10,18 +10,32 @@
 </html><html xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <!-- Milligram stylesheet -->
-    <!--<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">-->
-    <!--<link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">-->
-    <!--<link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">-->
 
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
 
+    <link rel="stylesheet" href="css/style.css" type="text/css">
 
-    <title>Monthly Spending</title>
+    <script src="js/verifyDeleteAll.js"></script>
+    <script type="text/javascript" src="js/verifyDeleteAll.js"></script>
+
+    <title>Create Expense</title>
 </head>
 <body>
-<h1>Enter a new spending event</h1>
 
+
+<h1 class="center">Add New Expense</h1>
+
+<div id="canter">
+    <a href="/" class="button button-outline">Add New Expense</a>
+    <a href="/allExpenses" class="button button-outline">Spending Events Table</a>
+    <a href="/categoriesTable" class="button button-outline">Categories Table</a>
+    <a th:href="'/deleteAll/'" class="button button-outline" id="delete_button">Delete All Entries</a>
+</div>
+
+
+<div id="squeeze">
 <!--This is doing a POST to the /addTask page.  It is inserting the current task object-->
 <form action="#" method="POST" th:action="@{/addExpense}" th:object="${expense}">
     <input type = "date" placeholder="date" th:field="*{dayt}" />
@@ -54,17 +68,28 @@
     <button id = "add-expense">Add Expense</button>
 
 </form>
+</div>
 
-<a href="/allExpenses">All Expenses</a>
+<script>
+    var deleteButtons = document.getElementById("delete_button");
+
+    for (var x=0; x < deleteButtons.length; x++) {
+        deleteButtons[x].addEventListener("click", function(event) {
+            var sure = confirm("Did you actually do that?");
+            if (!sure) {
+                event.preventDefault();
+            }
+        });
+    }
+
+    delete_button.addEventListener("click", function(event){
+        var sure = confirm("Delete all entries?");
+        if (!sure) {
+            event.preventDefault();   // don't actually click the button or send a request to the server.
+        }
+    });
+</script>
+
 </body>
-
-
-
-
-
-
-
-
-
 
 </html>
