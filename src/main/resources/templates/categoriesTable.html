@@ -21,7 +21,7 @@
 
 <h1 class="center">Categories Table</h1>
 
-<div id="canter">
+<div id="centerButtons">
     <a href="/" class="button button-outline">Add New Expense</a>
     <a href="/allExpenses" class="button button-outline">Spending Events Table</a>
     <a href="/categoriesTable" class="button button-outline">Categories Table</a>
@@ -29,11 +29,11 @@
 </div>
 <br>
 
-<!--<button onclick="myFunction()">Try it</button>-->
+<!--This is printing the sum, but because of the format, it is giving a null pointer eror.  Need to fix-->
+<h2 id="valCenter"><span id="val" ></span></h2>
 
-<!--<span>The total for Target for the month is $<span th:text="${totalExpensesTarget}"></span></span><br>-->
-<!--<span>The total for clothing for the month is $<span th:text="${totalExpensesClothing}"></span></span><br>-->
-<!--<span>The total for pets for the month is $<span th:text="${totalExpensesPets}"></span></span>-->
+<!--This is the table where it is printing the variable for each category amount, the hard coded budgeted amount, and the difference.-->
+<!--The difference amount is not working.  I need to fix the data types so that math operations can be performed on the two amounts, but I could not get it.-->
 
 <table>
     <tr>
@@ -112,34 +112,50 @@
 
 </table>
 
-    <script>
+<!--Want to also put spending total on categories page, but getting a data type null pointer error that I need to fix-->
+<!--<script>-->
+    <!--var table = document.getElementById("table"), sumVal = 0;-->
 
-        function myFunction () {
+    <!--for(var i = 1; i < table.rows.length; i++)-->
+    <!--{-->
+        <!--// This is getting the total from the 5th column, amount [4]-->
+        <!--sumVal = sumVal + parseInt(table.rows[i].cells[1].innerHTML);-->
+    <!--}-->
+
+    <!--document.getElementById("val").innerHTML = "TOTAL: $" + sumVal;-->
+    <!--console.log(sumVal);-->
+
+<!--</script>-->
+
+<!--This is a script I was trying to use in order to get a difference between the category amount and the budgeted amount-->
+<!--But I could not get it working.-->
+
+    <!--<script>-->
+
+        <!--function myFunction () {-->
+
+        <!--tast1 = document.getElementById(test1);-->
+        <!--tust1 = Number(tast1);-->
+        <!--tast2 = document.getElementById(test2);-->
+        <!--tust2 = Number(tast2);-->
+        <!--tust3 = tust2 - tust1;-->
+        <!--document.getElementById("test3").innerHTML = tust3;-->
+        <!--console.log(test1);-->
+        <!--console.log(tast1);-->
+        <!--console.log(tust1);-->
+        <!--console.log(test2);-->
+        <!--console.log(tast2);-->
+        <!--console.log(tust2);-->
+        <!--console.log(tust3);-->
+        <!--console.log(typeof test1);-->
+        <!--console.log(typeof test2);-->
+
+        <!--}-->
+
+    <!--</script>-->
 
 
-        tast1 = document.getElementById(test1);
-        tust1 = Number(tast1);
-        tast2 = document.getElementById(test2);
-        tust2 = Number(tast2);
-        tust3 = tust2 - tust1;
-        document.getElementById("test3").innerHTML = tust3;
-        console.log(test1);
-        console.log(tast1);
-        console.log(tust1);
-        console.log(test2);
-        console.log(tast2);
-        console.log(tust2);
-        console.log(tust3);
-        console.log(typeof test1);
-        console.log(typeof test2);
-
-
-
-        }
-
-    </script>
-
-
+<!--This script is to have an alert box popup to ask the user if they are sure that they want to delete all entries.-->
     <script>
         var deleteButtons = document.getElementById("delete_button");
 

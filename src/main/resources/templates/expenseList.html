@@ -17,7 +17,7 @@
 
 <h1 class="center">Spending Events Table</h1>
 
-<div id="canter">
+<div id="centerButtons">
 <a href="/" class="button button-outline">Add New Expense</a>
 <a href="/allExpenses" class="button button-outline">Spending Events Table</a>
 <a href="/categoriesTable" class="button button-outline">Categories Table</a>
@@ -25,35 +25,10 @@
 </div>
 <br><br>
 
-
-<!--<a class="button" href="/" class="button button-clear">Add a new expense</a>-->
-<!--<a class="button" href="/categoriesTable" class="button button-clear">Go to Categories Table</a>-->
-<!--<a class="button" href="/" class="button button-clear">Add a new expense</a>-->
-
-
-<!--<button class="button button-outline">Outlined Button</button>-->
-
-
-<!--<input class="button button-clear" type="submit" value="Clear Button">-->
-<!--<input class="button button-clear" type="submit" value="Clear Button">-->
-
-
 <!--This is printing the sum, javascript below-->
 <h2 id="valCenter"><span id="val" ></span></h2>
 <h5 class="center">Click on Table Header to sort</h5>
 
-<!--Don't think this is doing anything.  Commenting it out-->
-<!--<span id="value"></span>-->
-
-<!--<p><button onclick="sortTableD()">Sort by Description</button></p>-->
-
-<!--<p><button onclick="sortTableA()">Sort by amount</button></p>-->
-
-<!--<p><button onclick="sortTableC()">Sort by category</button></p>-->
-
-
-<p></p>
-<!--<button type="button" class="btn btn-danger">deletebutton</button>-->
 
 <table id = "table">
     <tr>
@@ -67,11 +42,7 @@
     </tr>
     <tr th:each="expense : ${expenses}">
         <td><button class="modify-button" th:id="'modify-button-' + ${expense.id}" >Modify Entry</button></td>
-
-        <!--<td><button id="myBtnn">Delete Entry</button></td>-->
-
         <td><a th:href="'/delete/' + ${expense.id}" class="button">Delete Entry</button></a></td>
-
         <!--Hiding the expense ID-->
         <td th:id="'expense-id-'+${expense.id}" hidden th:text="${expense.id}"></td>
         <!--th:text is creating a substring of the date that is splitting it from the index of 5-10 so the year, as well as the time stamp is cut out-->
@@ -82,22 +53,15 @@
         <!--th:text is capitalizing all of the descriptions-->
         <td th:id="'expense-description-'+${expense.id}" th:text="${#strings.capitalize(expense.description)}"></td>
         <td th:id="'expense-category-'+${expense.id}" th:text="${expense.category}"></td>
-        <!--<td th:text="${expense.category}"></td>-->
-
-
 
     </tr>
 
 </table>
 
-<!--<a th:href="'/deleteAll/'"  class="button button-outline">DELETE ALL ENTRIES</a></p>-->
-
-
 <!--This js gets the total of the amount column.-->
 <!--Used this tutorial as a guide to get the total-->
 <!--https://1bestcsharp.blogspot.com/2017/08/javascript-table-column-values-sum.html-->
 <script>
-
     var table = document.getElementById("table"), sumVal = 0;
 
     for(var i = 1; i < table.rows.length; i++)
@@ -111,128 +75,11 @@
 
 </script>
 
-<!--This works-->
-<script>
-function sortTableD() {
-var table, rows, switching, i, x, y, shouldSwitch;
-table = document.getElementById("table");
-switching = true;
-/*Make a loop that will continue until
-no switching has been done:*/
-while (switching) {
-//start by saying: no switching is done:
-switching = false;
-rows = table.getElementsByTagName("TR");
-/*Loop through all table rows (except the
-first, which contains table headers):*/
-for (i = 1; i < (rows.length - 1); i++) {
-//start by saying there should be no switching:
-shouldSwitch = false;
-/*Get the two elements you want to compare,
-one from current row and one from the next:*/
-x = rows[i].getElementsByTagName("TD")[5];
-y = rows[i + 1].getElementsByTagName("TD")[5];
-console.log(x);
-console.log(y);
-//check if the two rows should switch place:
-if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-//if so, mark as a switch and break the loop:
-shouldSwitch= true;
-break;
-}
-}
-if (shouldSwitch) {
-/*If a switch has been marked, make the switch
-and mark that a switch has been done:*/
-rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-switching = true;
-}
-}
-}
-</script>
-
-<!--&lt;!&ndash;This works, but I am trying something else&ndash;&gt;-->
-<script>
-function sortTableA() {
-var table, rows, switching, i, x, y, shouldSwitch;
-table = document.getElementById("table");
-switching = true;
-/*Make a loop that will continue until
-no switching has been done:*/
-while (switching) {
-//start by saying: no switching is done:
-switching = false;
-rows = table.getElementsByTagName("TR");
-/*Loop through all table rows (except the
-first, which contains table headers):*/
-for (i = 1; i < (rows.length - 1); i++) {
-//start by saying there should be no switching:
-shouldSwitch = false;
-/*Get the two elements you want to compare,
-one from current row and one from the next:*/
-x = rows[i].getElementsByTagName("TD")[4];
-y = rows[i + 1].getElementsByTagName("TD")[4];
-//check if the two rows should switch place:
-
-console.log(x.innerHTML);
-console.log(y.innerHTML);
 
 
-if (x.innerHTML < y.innerHTML) {
-//if so, mark as a switch and break the loop:
-shouldSwitch= true;
-break;
-}
-}
-if (shouldSwitch) {
-/*If a switch has been marked, make the switch
-and mark that a switch has been done:*/
-rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-switching = true;
-}
-}
-}
-</script>
-
-
-<script>
-    function sortTableC() {
-        var table, rows, switching, i, x, y, shouldSwitch;
-        table = document.getElementById("table");
-        switching = true;
-        /*Make a loop that will continue until
-        no switching has been done:*/
-        while (switching) {
-//start by saying: no switching is done:
-            switching = false;
-            rows = table.getElementsByTagName("TR");
-            /*Loop through all table rows (except the
-            first, which contains table headers):*/
-            for (i = 1; i < (rows.length - 1); i++) {
-//start by saying there should be no switching:
-                shouldSwitch = false;
-                /*Get the two elements you want to compare,
-                one from current row and one from the next:*/
-                x = rows[i].getElementsByTagName("TD")[5];
-                y = rows[i + 1].getElementsByTagName("TD")[5];
-                console.log(x);
-                console.log(y);
-//check if the two rows should switch place:
-                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-//if so, mark as a switch and break the loop:
-                    shouldSwitch= true;
-                    break;
-                }
-            }
-            if (shouldSwitch) {
-                /*If a switch has been marked, make the switch
-                and mark that a switch has been done:*/
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-            }
-        }
-    }
-</script>
+<!--Used W3 schools tutorial as a guide to sorting by clicking on column headers.-->
+<!--https://www.w3schools.com/howto/howto_js_sort_table.asp-->
+<!--The amount and date sorting to not work.  I need to fix them.-->
 
 <script>
     function sortTable(n) {
@@ -291,6 +138,8 @@ switching = true;
     }
 </script>
 
+
+<!--This script is to have an alert box popup to ask the user if they are sure that they want to delete all entries.-->
 <script>
     var deleteButtons = document.getElementById("delete_button");
 
@@ -323,6 +172,7 @@ switching = true;
 
             <input id="modal-edit-id" name="id" type="hidden" class="form-control"/>
             <input id="modal-edit-description" name="description" type="text" placeholder="description" class="form-control"/>
+            <!--When the modal for date comes up, and I modify, I am losing the previously entered date.  Need to fix-->
             <input id="modal-edit-date" name="dayt" type = "date" placeholder="date" />
             <input id="modal-edit-amount" name="amount" type = "text" placeholder="amount" />
             <!--<input id="modal-edit-category" name="category" type = "text" placeholder="category" />-->
@@ -343,10 +193,6 @@ switching = true;
             <button type="submit">Update</button>
 
 
-            <!--<input type="text" class="form-control" name="prodName" th:value="${task.description}" />-->
-
-
-
         </form>
 
 
@@ -365,13 +211,8 @@ switching = true;
 
 </div>
 
-
-
-
-
 <script src="js/modals.js"></script>
 <script type="text/javascript" src="js/modals.js"></script>
-
 
 
 </body>

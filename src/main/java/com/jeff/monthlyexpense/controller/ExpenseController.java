@@ -78,6 +78,8 @@ public class ExpenseController {
     }
 
     //This mapping is for the categoriesTable.  Each category is returning the total for the category
+//    Need to add if statements to every single category to prevent null pointer exceptions if there is a category which does not have an expense
+//    But I could not correctly format the if statement to do this.
     @RequestMapping("/categoriesTable")
     public String categoriesTable(Model model) {
         double totalExpensesMortgageRent = expenses.getTotalExpensesByCategory("Mortgage/Rent");

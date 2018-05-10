@@ -17,8 +17,6 @@
 
     <link rel="stylesheet" href="css/style.css" type="text/css">
 
-    <script src="js/verifyDeleteAll.js"></script>
-    <script type="text/javascript" src="js/verifyDeleteAll.js"></script>
 
     <title>Create Expense</title>
 </head>
@@ -27,7 +25,8 @@
 
 <h1 class="center">Add New Expense</h1>
 
-<div id="canter">
+
+<div id="centerButtons">
     <a href="/" class="button button-outline">Add New Expense</a>
     <a href="/allExpenses" class="button button-outline">Spending Events Table</a>
     <a href="/categoriesTable" class="button button-outline">Categories Table</a>
@@ -35,13 +34,16 @@
 </div>
 
 
+
 <div id="squeeze">
-<!--This is doing a POST to the /addTask page.  It is inserting the current task object-->
+
+<!--This form is creating a new expense object, and doing a post to the addExpense page    -->
 <form action="#" method="POST" th:action="@{/addExpense}" th:object="${expense}">
     <input type = "date" placeholder="date" th:field="*{dayt}" />
     <br><br>
+<!--Could not get amount out of the 0.0 format.  If the user tabs to it, the curser will be on the right side of the decimal.  Need to fix-->
     <input type = "text" value="0" placeholder="0" th:field="*{amount}" />
-    <!--<input type = "text" id="amount" name="amount" placeholder="amount" th:value="*{amount}";-->
+
     <br><br>
     <input type = "text" placeholder="description" th:field="*{description}" />
     <br><br>
@@ -70,6 +72,7 @@
 </form>
 </div>
 
+<!--This script is to have an alert box popup to ask the user if they are sure that they want to delete all entries.-->
 <script>
     var deleteButtons = document.getElementById("delete_button");
 
