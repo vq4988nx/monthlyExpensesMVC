@@ -9,8 +9,8 @@
 
     <link rel="stylesheet" href="css/style.css" type="text/css">
 
-    <script src="js/verifyDeleteAll.js"></script>
-    <script type="text/javascript" src="js/verifyDeleteAll.js"></script>
+    <!--<script src="js/verifyDeleteAll.js"></script>-->
+    <!--<script type="text/javascript" src="js/verifyDeleteAll.js"></script>-->
 
     <meta charset="UTF-8">
     <title>Categories Table</title>
@@ -34,6 +34,8 @@
 
 <!--This is the table where it is printing the variable for each category amount, the hard coded budgeted amount, and the difference.-->
 <!--The difference amount is not working.  I need to fix the data types so that math operations can be performed on the two amounts, but I could not get it.-->
+
+
 
 <table>
     <tr>
@@ -130,29 +132,30 @@
 <!--This is a script I was trying to use in order to get a difference between the category amount and the budgeted amount-->
 <!--But I could not get it working.-->
 
-    <!--<script>-->
+    <script>
 
-        <!--function myFunction () {-->
+        function myFunction () {
 
-        <!--tast1 = document.getElementById(test1);-->
-        <!--tust1 = Number(tast1);-->
-        <!--tast2 = document.getElementById(test2);-->
-        <!--tust2 = Number(tast2);-->
-        <!--tust3 = tust2 - tust1;-->
-        <!--document.getElementById("test3").innerHTML = tust3;-->
-        <!--console.log(test1);-->
-        <!--console.log(tast1);-->
-        <!--console.log(tust1);-->
-        <!--console.log(test2);-->
-        <!--console.log(tast2);-->
-        <!--console.log(tust2);-->
-        <!--console.log(tust3);-->
-        <!--console.log(typeof test1);-->
-        <!--console.log(typeof test2);-->
+        tast1 = document.getElementById(test1);
+        tust1 = Number(tast1);
+        tast2 = document.getElementById(test2);
+        tust2 = Number(tast2);
+        tust3 = tust2 - tust1;
+        document.getElementById("test3").innerHTML = tust3;
+        console.log(test1);
+        console.log(tast1);
+        console.log(tust1);
+        console.log(test2);
+        console.log(tast2);
+        console.log(tust2);
+        console.log(tust3);
+        console.log(typeof test1);
+        console.log(typeof test2);
 
-        <!--}-->
+        }
+        window.onload = myFunction();
 
-    <!--</script>-->
+    </script>
 
 
 <!--This script is to have an alert box popup to ask the user if they are sure that they want to delete all entries.-->
